@@ -1,0 +1,48 @@
+frameworkVersion: ">=1.50.0 <2.0.0"
+service: lambda-blueprint
+provider:
+  name: aws
+  runtime: python3.7
+  memorySize: 1024
+  region: ${opt:region, 'eu-west-1'}
+  stage: ${opt:stage, 'dev'}
+  deploymentBucket:
+    name: ok-origo-dataplatform-config-${self:provider.stage}
+    serverSideEncryption: AES256
+  deploymentPrefix: deploy
+  iamManagedPolicies:
+    - Fn::Join:
+      - ':'
+      - - 'arn:aws:iam:'
+        - Ref: AWS::AccountId
+        - 'policy/lambda-blueprint-policy'
+  tags:
+    GIT_REV: ${git:branch}:${git:sha1}
+  environment:
+    GIT_REV: ${git:branch}:${git:sha1}
+    STAGE: ${self:provider.stage}
+package:
+  exclude:
+    - '**/*'
+  include:
+    - blueprint/*.py
+
+
+functions:
+  get_blueprint: ${file(serverless/functions/get_blueprint.yaml)}
+
+plugins:
+  - serverless-python-requirements
+  - serverless-plugin-git-variables
+
+resources:
+  Description: |
+    ${self:service} ${git:branch}:${git:sha1}
+    ${git:message}
+
+custom:
+  pythonRequirements:
+    dockerizePip: non-linux
+    slim: true
+    usePoetry: false
+  exportGitVariables: false
