@@ -1,6 +1,6 @@
-Lambda Blueprint
+Lambda Boilerplate
 =============
-A blueprint to use as a starting point for lambda functions in Oslo Origo
+A boilerplate to use as a starting point for lambda functions in Oslo Origo
 
 # Usage
 Copy repo content to your new repository, or create a new branch where you quickly can test a custom lambda function
@@ -27,3 +27,28 @@ For tests and linting we use [pytest](https://pypi.org/project/pytest/), [flake8
 `make deploy` or `make deploy-prod`
 
 Requires `saml2aws`
+
+# IAM policy
+IAM policy is available in dataplatform-config/devops/modules/services/lambda-boilerplate/, but if you want to copy-paste a IAM custom role while developing:
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "LambdaBoilerplateS3GetObject",
+            "Effect": "Allow",
+            "Action": [
+                "s3:PutObject",
+                "s3:GetObject"
+            ],
+            "Resource": "arn:aws:s3:::ok-origo-dataplatform-dev/test/lambda-boilerplate/*"
+        },
+        {
+            "Sid": "LambdaBoilerplateS3ListObjects",
+            "Effect": "Allow",
+            "Action": "s3:ListBucket",
+            "Resource": "arn:aws:s3:::ok-origo-dataplatform-dev"
+        }
+    ]
+}
+```

@@ -1,6 +1,0 @@
-handler: blueprint.handler.get_blueprint
-events:
-  - http:
-      path: "blueprint"
-      method: "get"
-      cors: true
