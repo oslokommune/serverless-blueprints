@@ -9,19 +9,19 @@
 .DEV_PROFILE := saml-origo-dev
 .PROD_PROFILE := saml-dataplatform-prod
 
+PYTHON := python3
+
 .PHONY: init
 init:
-	python3 -m pip install tox black pip-tools
-	pip-compile
 	npm install
 
 .PHONY: format
 format:
-	python3 -m black .
+	$(PYTHON) -m black .
 
 .PHONY: test
 test:
-	python3 -m tox -p auto
+	$(PYTHON) -m tox -p auto
 
 .PHONY: upgrade-deps
 upgrade-deps:
