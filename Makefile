@@ -32,7 +32,7 @@ upgrade-deps:
 	pip-compile -U
 
 .PHONY: deploy
-deploy: init pip-install format test login-dev
+deploy: init format test login-dev
 	sls deploy --stage dev --aws-profile $(.DEV_PROFILE)
 
 .PHONY: deploy-prod

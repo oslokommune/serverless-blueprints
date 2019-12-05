@@ -36,7 +36,7 @@ Pipeline pipeline = new Pipeline(this)
 
 if(env.BRANCH_NAME == "master"){
   pipeline
-  .addStage(new PythonStageWithGit(buildAndBumpVersion, "Bump Version"))
+  //.addStage(new PythonStageWithGit(buildAndBumpVersion, "Bump Version"))
   //.addStage(new PythonStage(deployDev)) # Uncomment for automatic deployment
 
 }
