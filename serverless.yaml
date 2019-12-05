@@ -7,7 +7,7 @@ provider:
   region: ${opt:region, 'eu-west-1'}
   stage: ${opt:stage, 'dev'}
   deploymentBucket:
-    name: ok-origo-dataplatform-config-${self:provider.stage}
+    name: ${self:custom.deploymentBucket.${self:provider.stage}, self:custom.deploymentBucket.dev}
     serverSideEncryption: AES256
   deploymentPrefix: deploy
   iamManagedPolicies:
@@ -49,3 +49,6 @@ custom:
     slim: true
     usePoetry: false
   exportGitVariables: false
+  deploymentBucket:
+    prod: ok-origo-dataplatform-config-prod
+    dev: ok-origo-dataplatform-config-dev
