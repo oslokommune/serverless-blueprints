@@ -15,6 +15,10 @@ PYTHON := python3
 init:
 	npm install
 
+.PHONY: pip-install
+pip-install:
+	$(PYTHON) -m pip install tox black pip-tools wheel twine bump2version
+
 .PHONY: format
 format:
 	$(PYTHON) -m black .
@@ -51,3 +55,12 @@ is-git-clean:
 		echo Git working directory is dirty, aborting >&2; \
 		false; \
 	fi
+
+.PHONY: build
+build: init
+	$(PYTHON) setup.py sdist bdist_wheel
+
+.PHONY: jenkins-bump-patch
+jenkins-bump-patch: is-git-clean
+	bump2version patch
+	git push origin HEAD:${BRANCH_NAME}
