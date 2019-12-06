@@ -8,11 +8,10 @@ import no.ok.build.k8s.jenkins.pipeline.common.*
 import java.util.function.Predicate
 
 String test = """
-              pip3 install tox
-              tox
+              make test BUILD_VENV=/tmp/virtualenv
               """
 String buildAndBumpVersion = """
-                make pip-install clean build jenkins-bump-patch
+                make clean build jenkins-bump-patch BUILD_VENV=/tmp/virtualenv
                 """
 
 String deployDev = """
