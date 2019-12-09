@@ -11,11 +11,7 @@ provider:
     serverSideEncryption: AES256
   deploymentPrefix: deploy
   iamManagedPolicies:
-    - Fn::Join:
-      - ':'
-      - - 'arn:aws:iam:'
-        - Ref: AWS::AccountId
-        - 'policy/lambda-boilerplate-policy'
+    - 'arn:aws:iam::#{AWS::AccountId}:policy/lambda-boilerplate-policy'
   tags:
     GIT_REV: ${git:branch}:${git:sha1}
     VERSION: ${self:custom.version}
@@ -36,6 +32,7 @@ functions:
 plugins:
   - serverless-python-requirements
   - serverless-plugin-git-variables
+  - serverless-pseudo-parameters
 
 resources:
   Description: |
