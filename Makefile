@@ -9,39 +9,54 @@
 .DEV_PROFILE := saml-origo-dev
 .PROD_PROFILE := saml-dataplatform-prod
 
-PYTHON := python3
+GLOBAL_PY := python3
+
+BUILD_VENV ?= .build_venv
+BUILD_PY := $(BUILD_VENV)/bin/python
 
 .PHONY: init
-init:
+init: node_modules $(BUILD_VENV)
+
+node_modules: package.json package-lock.json
 	npm install
 
-.PHONY: pip-install
-pip-install:
-	$(PYTHON) -m pip install tox black pip-tools wheel twine bump2version
+$(BUILD_VENV):
+	$(GLOBAL_PY) -m venv $(BUILD_VENV)
+	$(BUILD_PY) -m pip install -U pip
 
 .PHONY: format
-format:
-	$(PYTHON) -m black .
+format: $(BUILD_VENV)/bin/black
+	$(BUILD_PY) -m black
 
 .PHONY: test
-test:
-	$(PYTHON) -m tox -p auto
+test: $(BUILD_VENV)/bin/tox
+	$(BUILD_PY) -m tox -p auto
 
 .PHONY: upgrade-deps
-upgrade-deps:
-	pip-compile -U
+upgrade-deps: $(BUILD_VENV)/bin/pip-compile
+	$(BUILD_VENV)/bin/pip-compile -U
 
 .PHONY: deploy
-deploy: init format test login-dev
+deploy: node_modules test login-dev
+	@echo "\nDeploying to stage: $${STAGE:-dev}\n"
 	sls deploy --stage $${STAGE:-dev} --aws-profile $(.DEV_PROFILE)
 
 .PHONY: deploy-prod
-deploy-prod: init format is-git-clean test login-prod
+deploy-prod: node_modules is-git-clean test login-prod
 	sls deploy --stage prod --afws-profile $(.PROD_PROFILE)
 
+ifeq ($(MAKECMDGOALS),undeploy)
+ifndef STAGE
+$(error STAGE is not set)
+endif
+ifeq ($(STAGE),dev)
+$(error Please do not undeploy dev)
+endif
+endif
 .PHONY: undeploy
 undeploy: login-dev
-	sls remove --stage $${STAGE} --aws-profile $(.DEV_PROFILE)
+	@echo "\nUndeploying stage: $(STAGE)\n"
+	sls remove --stage $(STAGE) --aws-profile $(.DEV_PROFILE)
 
 .PHONY: login-dev
 login-dev:
@@ -61,10 +76,24 @@ is-git-clean:
 	fi
 
 .PHONY: build
-build: init
-	$(PYTHON) setup.py sdist bdist_wheel
+build: $(BUILD_VENV)/bin/wheel $(BUILD_VENV)/bin/twine
+	$(BUILD_PY) setup.py sdist bdist_wheel
 
 .PHONY: jenkins-bump-patch
-jenkins-bump-patch: is-git-clean
-	bump2version patch
+jenkins-bump-patch: $(BUILD_VENV)/bin/bump2version is-git-clean
+	$(BUILD_VENV)/bin/bump2version patch
 	git push origin HEAD:${BRANCH_NAME}
+
+
+###
+# Python build dependencies
+##
+
+$(BUILD_VENV)/bin/pip-compile: $(BUILD_VENV)
+	$(BUILD_PY) -m pip install -U pip-tools
+
+$(BUILD_VENV)/bin/pip-sync: $(BUILD_VENV)
+	$(BUILD_PY) -m pip install -U pip-tools
+
+$(BUILD_VENV)/bin/%: $(BUILD_VENV)
+	$(BUILD_PY) -m pip install -U $*
