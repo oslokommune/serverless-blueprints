@@ -11,11 +11,8 @@ provider:
     serverSideEncryption: AES256
   deploymentPrefix: deploy
   iamManagedPolicies:
-    - Fn::Join:
-      - ':'
-      - - 'arn:aws:iam:'
-        - Ref: AWS::AccountId
-        - 'policy/lambda-boilerplate-policy'
+    - 'arn:aws:iam::#{AWS::AccountId}:policy/lambda-boilerplate-policy'
+    - 'arn:aws:iam::aws:policy/AWSXRayDaemonWriteAccess'
   tags:
     GIT_REV: ${git:branch}:${git:sha1}
     VERSION: ${self:custom.version}
@@ -36,6 +33,8 @@ functions:
 plugins:
   - serverless-python-requirements
   - serverless-plugin-git-variables
+  - serverless-pseudo-parameters
+  - serverless-es-logs
 
 resources:
   Description: |
@@ -48,6 +47,10 @@ custom:
     dockerizePip: non-linux
     slim: true
     usePoetry: false
+  esLogs:
+    endpoint: ${ssm:/dataplatform/elasticsearch/endpoint}
+    index: ${self:service}
+    filterPattern: '{ $.function_name = "*" }'
   exportGitVariables: false
   deploymentBucket:
     prod: ok-origo-dataplatform-config-prod
