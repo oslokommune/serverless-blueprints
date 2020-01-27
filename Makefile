@@ -43,7 +43,7 @@ deploy: node_modules test login-dev
 
 .PHONY: deploy-prod
 deploy-prod: node_modules is-git-clean test login-prod
-	sls deploy --stage prod --afws-profile $(.PROD_PROFILE)
+	sls deploy --stage prod --aws-profile $(.PROD_PROFILE)
 
 ifeq ($(MAKECMDGOALS),undeploy)
 ifndef STAGE
