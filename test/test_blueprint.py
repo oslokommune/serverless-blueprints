@@ -14,3 +14,6 @@ class TestBlueprint:
         body = json.loads(response["body"])
         assert response["statusCode"] == 200
         assert body["boilerplate"] == "Hello, world from Boilerplate!"
+
+    def test_dummy(self):
+        assert "kake" == "kake"
