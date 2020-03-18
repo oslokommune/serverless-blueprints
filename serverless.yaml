@@ -1,4 +1,4 @@
-frameworkVersion: ">=1.50.0 <2.0.0"
+frameworkVersion: ">=1.64.0 <2.0.0"
 service: lambda-boilerplate
 provider:
   name: aws
@@ -10,6 +10,7 @@ provider:
     name: ${self:custom.deploymentBucket.${self:provider.stage}, self:custom.deploymentBucket.dev}
     serverSideEncryption: AES256
   deploymentPrefix: deploy
+  rolePermissionsBoundary: "arn:aws:iam::#{AWS::AccountId}:policy/oslokommune/oslokommune-boundary"
   iamManagedPolicies:
     - 'arn:aws:iam::#{AWS::AccountId}:policy/lambda-boilerplate-policy'
     - 'arn:aws:iam::aws:policy/AWSXRayDaemonWriteAccess'
