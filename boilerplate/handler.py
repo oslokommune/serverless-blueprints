@@ -6,7 +6,7 @@ from dataplatform.awslambda.logging import logging_wrapper, log_add
 patch_all()
 
 
-@logging_wrapper("lambda-boilerplate")
+@logging_wrapper
 @xray_recorder.capture("get_boilerplate")
 def get_boilerplate(event, context):
     body = "Hello, world from Boilerplate!"
