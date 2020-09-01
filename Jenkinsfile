@@ -10,6 +10,7 @@ import java.util.function.Predicate
 String test = """
               make test BUILD_VENV=/tmp/virtualenv
               """
+
 String buildAndBumpVersion = """
                 make clean build jenkins-bump-patch BUILD_VENV=/tmp/virtualenv
                 """
