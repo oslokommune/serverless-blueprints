@@ -49,23 +49,21 @@ undeploy: login-dev
 	@echo "\nUndeploying stage: $(STAGE)\n"
 	sls remove --stage $(STAGE) --aws-profile $(.DEV_PROFILE)
 
-ifeq ($(MAKECMDGOALS),login-dev)
-  ifndef OKDATA_AWS_ROLE_DEV
-    $(error OKDATA_AWS_ROLE_DEV is not set)
-  endif
-endif
 .PHONY: login-dev
 login-dev:
+ifndef OKDATA_AWS_ROLE_DEV
+	$(error OKDATA_AWS_ROLE_DEV is not set)
+else
 	saml2aws login --role=$(OKDATA_AWS_ROLE_DEV) --profile=$(.DEV_PROFILE)
-
-ifeq ($(MAKECMDGOALS),login-prod)
-  ifndef OKDATA_AWS_ROLE_PROD
-    $(error OKDATA_AWS_ROLE_PROD is not set)
-  endif
 endif
+
 .PHONY: login-prod
 login-prod:
+ifndef OKDATA_AWS_ROLE_PROD
+	$(error OKDATA_AWS_ROLE_PROD is not set)
+else
 	saml2aws login --role=$(OKDATA_AWS_ROLE_PROD) --profile=$(.PROD_PROFILE)
+endif
 
 .PHONY: is-git-clean
 is-git-clean:
