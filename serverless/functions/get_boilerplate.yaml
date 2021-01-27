@@ -4,5 +4,3 @@ events:
       path: "boilerplate"
       method: "get"
       cors: true
-layers:
-  - ${ssm:/dataplatform/shared/python-base-layer-arn}
