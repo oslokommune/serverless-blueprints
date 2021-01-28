@@ -17,5 +17,5 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.oslo.kommune.no/origo-dataplatform/lambda-boilerplate",
     packages=find_packages(),
-    install_requires=[],
+    install_requires=["aws-xray-sdk", "okdata-aws"],
 )
