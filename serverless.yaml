@@ -35,10 +35,11 @@ functions:
   get_boilerplate: ${file(serverless/functions/get_boilerplate.yaml)}
 
 plugins:
-  - serverless-python-requirements
-  - serverless-plugin-git-variables
-  - serverless-pseudo-parameters
   - serverless-es-logs
+  - serverless-plugin-git-variables
+  - serverless-prune-plugin
+  - serverless-pseudo-parameters
+  - serverless-python-requirements
 
 resources:
   Description: |
@@ -55,6 +56,9 @@ custom:
     endpoint: ${ssm:/dataplatform/shared/logs-elasticsearch-endpoint}
     index: dataplatform-services
     filterPattern: '{ $.function_name = "*" }'
+  prune:
+    automatic: true
+    number: 3
   exportGitVariables: false
   deploymentBucket:
     prod: ok-origo-dataplatform-config-prod
