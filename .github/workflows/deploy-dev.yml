@@ -15,11 +15,7 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: '12.x'
-    - name: Install Serverless Framework
-      run: npm install -g serverless
     - name: Install NPM dependencies
       run: npm install
-    - name: Serverless AWS authentication
-      run: sls config credentials --provider aws --key ${{ secrets.AWS_ACCESS_KEY_DEV }} --secret ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
     - name: Deploy Lambda functions
-      run: SLS_DEBUG=true sls deploy -s dev
+      run: AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_DEV }} AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }} SLS_DEBUB=true ./node_modules/.bin/sls deploy -s dev
