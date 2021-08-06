@@ -57,9 +57,13 @@ For tests and linting we use [pytest](https://pypi.org/project/pytest/),
 
 ## Deploy
 
-`make deploy` or `make deploy-prod`
+Deploy to dev is automatic via Github Actions. Deploy to prod can be done with Github Actions via dispatch.
 
-Requires `saml2aws`
+This requires that the secrets `AWS_ACCESS_KEY_DEV`, `AWS_SECRET_ACCESS_KEY_DEV`, `AWS_ACCESS_KEY_PROD`, `AWS_SECRET_ACCESS_KEY_PROD` are set and updated. In order to set or update these secrets you can use the commands `make set-github-secrets` and `make set-github-secrets-prod` which
+requires [`github cli`](https://cli.github.com/) and `saml2aws`.
+
+You can alternatively deploy from local machine (requires `saml2aws`) with:
+`make deploy` or `make deploy-prod`
 
 
 ## IAM policy
