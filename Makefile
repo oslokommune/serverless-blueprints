@@ -65,29 +65,29 @@ endif
 
 .PHONY: set-github-secrets
 set-github-secrets: login-dev
-    aws ssm get-parameter \
-        --name /dataplatform/iam-users/dataplatform-github/access_key_id \
-        --profile $(.DEV_PROFILE) \
-        --region eu-west-1 \
-        --with-decryption --output text --query Parameter.Value | gh secret set AWS_ACCESS_KEY_DEV
-    aws ssm get-parameter \
-        --name /dataplatform/iam-users/dataplatform-github/secret_access_key \
-        --profile $(.DEV_PROFILE) \
-        --region eu-west-1 \
-        --with-decryption --output text --query Parameter.Value | gh secret set AWS_SECRET_ACCESS_KEY_DEV
+	aws ssm get-parameter \
+		--name /dataplatform/iam-users/dataplatform-github/access_key_id \
+		--profile $(.DEV_PROFILE) --region eu-west-1 \
+		--with-decryption --output text \
+		--query Parameter.Value | gh secret set AWS_ACCESS_KEY_DEV
+	aws ssm get-parameter \
+		--name /dataplatform/iam-users/dataplatform-github/secret_access_key \
+		--profile $(.DEV_PROFILE) --region eu-west-1 \
+		--with-decryption --output text \
+		--query Parameter.Value | gh secret set AWS_SECRET_ACCESS_KEY_DEV
 
 .PHONY: set-github-secrets-prod
 set-github-secrets-prod: login-prod
-    aws ssm get-parameter \
-        --name /dataplatform/iam-users/dataplatform-github/access_key_id \
-        --profile $(.PROD_PROFILE) \
-        --region eu-west-1 \
-        --with-decryption --output text --query Parameter.Value | gh secret set AWS_ACCESS_KEY_PROD
-    aws ssm get-parameter \
-        --name /dataplatform/iam-users/dataplatform-github/secret_access_key \
-        --profile $(.PROD_PROFILE) \
-        --region eu-west-1 \
-        --with-decryption --output text --query Parameter.Value | gh secret set AWS_SECRET_ACCESS_KEY_PROD
+	aws ssm get-parameter \
+		--name /dataplatform/iam-users/dataplatform-github/access_key_id \
+		--profile $(.PROD_PROFILE) --region eu-west-1 \
+		--with-decryption --output text \
+		--query Parameter.Value | gh secret set AWS_ACCESS_KEY_PROD
+	aws ssm get-parameter \
+		--name /dataplatform/iam-users/dataplatform-github/secret_access_key \
+		--profile $(.PROD_PROFILE) --region eu-west-1 \
+		--with-decryption --output text \
+		--query Parameter.Value | gh secret set AWS_SECRET_ACCESS_KEY_PROD
 
 .PHONY: is-git-clean
 is-git-clean:
