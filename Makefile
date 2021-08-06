@@ -63,6 +63,32 @@ ifndef OKDATA_AWS_ROLE_PROD
 endif
 	saml2aws login --role=$(OKDATA_AWS_ROLE_PROD) --profile=$(.PROD_PROFILE)
 
+.PHONY: set-secrets
+set-secrets: login-dev
+    aws ssm get-parameter \
+        --name /dataplatform/iam-users/dataplatform-github/access_key_id \
+        --profile $(.DEV_PROFILE) \
+        --region eu-west-1 \
+        --with-decryption --output text --query Parameter.Value | gh secret set AWS_ACCESS_KEY_DEV
+    aws ssm get-parameter \
+        --name /dataplatform/iam-users/dataplatform-github/secret_access_key \
+        --profile $(.DEV_PROFILE) \
+        --region eu-west-1 \
+        --with-decryption --output text --query Parameter.Value | gh secret set AWS_SECRET_ACCESS_KEY_DEV
+
+.PHONY: set-secrets-prod
+set-secrets-prod: login-prod
+    aws ssm get-parameter \
+        --name /dataplatform/iam-users/dataplatform-github/access_key_id \
+        --profile $(.PROD_PROFILE) \
+        --region eu-west-1 \
+        --with-decryption --output text --query Parameter.Value | gh secret set AWS_ACCESS_KEY_PROD
+    aws ssm get-parameter \
+        --name /dataplatform/iam-users/dataplatform-github/secret_access_key \
+        --profile $(.PROD_PROFILE) \
+        --region eu-west-1 \
+        --with-decryption --output text --query Parameter.Value | gh secret set AWS_SECRET_ACCESS_KEY_PROD
+
 .PHONY: is-git-clean
 is-git-clean:
 	@status=$$(git fetch origin && git status -s -b) ;\
