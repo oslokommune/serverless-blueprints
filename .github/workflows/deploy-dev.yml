@@ -2,7 +2,9 @@ name: Deploy Dev
 on:
   push:
     branches:
-      - dp-2183-deploy-with-tests
+      - master
+  workflow_dispatch:
+
 jobs:
   deploy-dev:
     runs-on: ubuntu-latest
