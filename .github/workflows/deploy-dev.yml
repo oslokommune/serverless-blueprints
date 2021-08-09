@@ -2,7 +2,7 @@ name: Deploy Dev
 on:
   push:
     branches:
-      - main
+      - dp-2183-deploy-with-tests
 jobs:
   deploy-dev:
     runs-on: ubuntu-latest
@@ -12,6 +12,10 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.7
+    - name: Install Python dependencies
+      run: pip install tox
+    - name: Test with tox
+      run: tox -e py,flake8,black
     - uses: actions/setup-node@v1
       with:
         node-version: '12.x'
