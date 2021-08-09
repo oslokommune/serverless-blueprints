@@ -2,16 +2,22 @@ name: Deploy Dev
 on:
   push:
     branches:
-      - main
+      - master
+  workflow_dispatch:
+
 jobs:
   deploy-dev:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Set up Python 3.7
+    - name: Set up Python 3.8
       uses: actions/setup-python@v2
       with:
-        python-version: 3.7
+        python-version: 3.8
+    - name: Install Python dependencies
+      run: pip install tox
+    - name: Test with tox
+      run: tox -e py,flake8,black
     - uses: actions/setup-node@v1
       with:
         node-version: '12.x'
