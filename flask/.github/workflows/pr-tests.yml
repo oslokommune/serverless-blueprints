@@ -14,12 +14,5 @@ jobs:
         python-version: 3.9
     - name: Install dependencies
       run: pip install tox
-    - name: Test with tox [fastapi]
-      working-directory: ./fastapi
-      run: tox -e py,flake8,black
-    - name: Test with tox [flask]
-      working-directory: ./flask
-      run: tox -e py,flake8,black
-    - name: Test with tox [python]
-      working-directory: ./python
+    - name: Test with tox
       run: tox -e py,flake8,black
