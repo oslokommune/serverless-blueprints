@@ -38,7 +38,6 @@ functions:
         cors: true
 
 plugins:
-  - serverless-es-logs
   - serverless-plugin-git-variables
   - serverless-prune-plugin
   - serverless-python-requirements
