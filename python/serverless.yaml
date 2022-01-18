@@ -30,12 +30,13 @@ package:
     - hello_world/*.py
 
 functions:
-  handler: hello_world.handlers.say_hello
-  events:
-    - http:
-        path: "hello"
-        method: "get"
-        cors: true
+  hello_world:
+    handler: hello_world.handlers.say_hello
+    events:
+      - http:
+          path: "hello"
+          method: "get"
+          cors: true
 
 plugins:
   - serverless-plugin-git-variables
