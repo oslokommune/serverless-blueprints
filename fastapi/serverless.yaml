@@ -53,10 +53,6 @@ custom:
     slim: true
     usePoetry: false
     dockerRunCmdExtraArgs: ['-v', '${env:PWD}/../okdata-aws:/okdata-aws']
-  esLogs:
-    endpoint: ${ssm:/dataplatform/shared/logs-elasticsearch-endpoint}
-    index: dataplatform-services
-    filterPattern: '{ $.function_name = "*" }'
   prune:
     automatic: true
     number: 3
