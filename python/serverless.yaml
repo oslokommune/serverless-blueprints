@@ -54,10 +54,6 @@ custom:
     dockerizePip: non-linux
     slim: true
     usePoetry: false
-  esLogs:
-    endpoint: ${ssm:/dataplatform/shared/logs-elasticsearch-endpoint}
-    index: dataplatform-services
-    filterPattern: '{ $.function_name = "*" }'
   prune:
     automatic: true
     number: 3
