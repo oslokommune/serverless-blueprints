@@ -20,7 +20,7 @@ For tests and linting we use [pytest](https://pypi.org/project/pytest/),
 Example GitHub Actions for deploying to dev and prod on push to `main` is
 included in `.github/workflows`.
 
-You can also deploy from a local machine to dev (requires `saml2aws`) with:
+You can also deploy from a local machine to dev with:
 
 ```sh
 make deploy
