@@ -24,7 +24,7 @@ ecdsa==0.17.0
     # via python-jose
 fastapi==0.70.0
     # via fastapi-blueprint (setup.py)
-future==0.18.2
+future==0.18.3
     # via aws-xray-sdk
 h11==0.12.0
     # via uvicorn
