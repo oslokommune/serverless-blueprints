@@ -15,6 +15,6 @@ setup(
     packages=find_packages(),
     install_requires=[
         "aws-xray-sdk",
-        "okdata-aws",
+        "okdata-aws>=1.0.1,<2.0.0",
     ],
 )
