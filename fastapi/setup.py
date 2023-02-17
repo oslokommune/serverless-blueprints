@@ -17,7 +17,7 @@ setup(
         "aws-xray-sdk",
         "fastapi",
         "mangum",
-        "okdata-aws>=1.0.0",
+        "okdata-aws>=1.0.1,<2.0.0",
         "uvicorn",
     ],
 )
