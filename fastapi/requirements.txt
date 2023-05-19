@@ -22,7 +22,7 @@ click==8.0.3
     # via uvicorn
 ecdsa==0.17.0
     # via python-jose
-fastapi==0.92.0
+fastapi==0.95.2
     # via fastapi-blueprint (setup.py)
 future==0.18.3
     # via aws-xray-sdk
