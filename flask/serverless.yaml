@@ -43,6 +43,7 @@ functions:
       - http: ANY /{any+}
 
 plugins:
+  - serverless-better-credentials # must be first
   - serverless-plugin-git-variables
   - serverless-prune-plugin
   - serverless-python-requirements
