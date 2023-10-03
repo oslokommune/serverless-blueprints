@@ -84,7 +84,7 @@ typing-extensions==4.0.0
     #   mangum
     #   pydantic
     #   starlette
-urllib3==1.26.7
+urllib3==1.26.17
     # via
     #   botocore
     #   requests
