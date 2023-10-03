@@ -38,7 +38,7 @@ six==1.16.0
     # via
     #   flask-restful
     #   python-dateutil
-urllib3==1.26.14
+urllib3==1.26.17
     # via botocore
 werkzeug==2.3.3
     # via flask
