@@ -61,7 +61,6 @@ custom:
     packRequirements: false
   pythonRequirements:
     dockerizePip: non-linux
-    slim: true
     usePoetry: false
   prune:
     automatic: true
