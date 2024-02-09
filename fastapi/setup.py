@@ -15,7 +15,7 @@ setup(
     py_modules=["app"],
     install_requires=[
         "aws-xray-sdk",
-        "fastapi>=0.95.2",
+        "fastapi>=0.109.2",
         "mangum",
         "okdata-aws>=2,<3",
         "uvicorn",
