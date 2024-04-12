@@ -24,7 +24,7 @@ deprecation==2.1.0
     # via python-keycloak
 ecdsa==0.18.0
     # via python-jose
-idna==3.6
+idna==3.7
     # via
     #   anyio
     #   requests
