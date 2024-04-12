@@ -30,7 +30,7 @@ fastapi==0.109.2
     # via fastapi-blueprint (setup.py)
 h11==0.14.0
     # via uvicorn
-idna==3.6
+idna==3.7
     # via
     #   anyio
     #   requests
