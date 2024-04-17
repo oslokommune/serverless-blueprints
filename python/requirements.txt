@@ -4,8 +4,6 @@
 #
 #    pip-compile
 #
-annotated-types==0.6.0
-    # via pydantic
 anyio==4.2.0
     # via starlette
 attrs==23.2.0
@@ -14,49 +12,48 @@ attrs==23.2.0
     #   referencing
 aws-xray-sdk==2.12.1
     # via python-blueprint (setup.py)
+boto3==1.34.11
+    # via okdata-aws
 botocore==1.34.11
-    # via aws-xray-sdk
+    # via
+    #   aws-xray-sdk
+    #   boto3
+    #   s3transfer
 certifi==2023.11.17
     # via requests
+cffi==1.16.0
+    # via cryptography
 charset-normalizer==3.3.2
     # via requests
+cryptography==42.0.5
+    # via jwcrypto
 deprecation==2.1.0
     # via python-keycloak
-ecdsa==0.18.0
-    # via python-jose
 idna==3.7
     # via
     #   anyio
     #   requests
 jmespath==1.0.1
-    # via botocore
+    # via
+    #   boto3
+    #   botocore
 jsonschema==4.20.0
     # via okdata-sdk
 jsonschema-specifications==2023.12.1
     # via jsonschema
-okdata-aws==2.0.0
+jwcrypto==1.5.6
+    # via python-keycloak
+okdata-aws==4.1.0
     # via python-blueprint (setup.py)
-okdata-sdk==3.0.0
+okdata-sdk==3.1.1
     # via okdata-aws
 packaging==23.2
     # via deprecation
-pyasn1==0.5.1
-    # via
-    #   python-jose
-    #   rsa
-pydantic==2.5.3
-    # via okdata-aws
-pydantic-core==2.14.6
-    # via pydantic
-pyjwt==2.8.0
-    # via okdata-sdk
+pycparser==2.22
+    # via cffi
 python-dateutil==2.8.2
     # via botocore
-python-jose==3.3.0
-    # via
-    #   okdata-sdk
-    #   python-keycloak
-python-keycloak==3.7.0
+python-keycloak==3.12.0
     # via okdata-sdk
 referencing==0.32.0
     # via
@@ -74,22 +71,18 @@ rpds-py==0.16.2
     # via
     #   jsonschema
     #   referencing
-rsa==4.9
-    # via python-jose
+s3transfer==0.10.1
+    # via boto3
 six==1.16.0
-    # via
-    #   ecdsa
-    #   python-dateutil
+    # via python-dateutil
 sniffio==1.3.0
     # via anyio
-starlette==0.36.2
+starlette==0.37.2
     # via okdata-aws
 structlog==23.3.0
     # via okdata-aws
 typing-extensions==4.9.0
-    # via
-    #   pydantic
-    #   pydantic-core
+    # via jwcrypto
 urllib3==1.26.18
     # via
     #   botocore
