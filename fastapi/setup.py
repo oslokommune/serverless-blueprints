@@ -17,7 +17,7 @@ setup(
         "aws-xray-sdk",
         "fastapi>=0.109.2",
         "mangum",
-        "okdata-aws>=2,<3",
+        "okdata-aws>=4.1,<5",
         "uvicorn",
     ],
     python_requires=">=3.11",
