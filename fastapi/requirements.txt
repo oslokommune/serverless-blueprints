@@ -29,7 +29,7 @@ charset-normalizer==3.3.2
     # via requests
 click==8.1.7
     # via uvicorn
-cryptography==42.0.5
+cryptography==43.0.1
     # via jwcrypto
 deprecation==2.1.0
     # via python-keycloak
