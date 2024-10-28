@@ -40,7 +40,7 @@ six==1.16.0
     #   python-dateutil
 urllib3==1.26.19
     # via botocore
-werkzeug==3.0.3
+werkzeug==3.0.6
     # via flask
 wrapt==1.14.1
     # via aws-xray-sdk
