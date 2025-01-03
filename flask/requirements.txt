@@ -22,7 +22,7 @@ flask-restful==0.3.9
     # via flask-blueprint (setup.py)
 itsdangerous==2.1.2
     # via flask
-jinja2==3.1.4
+jinja2==3.1.5
     # via flask
 jmespath==1.0.1
     # via botocore
