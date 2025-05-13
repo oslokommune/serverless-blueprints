@@ -35,7 +35,7 @@ deprecation==2.1.0
     # via python-keycloak
 fastapi==0.115.2
     # via fastapi-blueprint (setup.py)
-h11==0.14.0
+h11==0.16.0
     # via uvicorn
 idna==3.7
     # via
