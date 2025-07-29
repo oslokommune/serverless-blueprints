@@ -4,7 +4,7 @@ service: python-blueprint
 
 provider:
   name: aws
-  runtime: python3.11
+  runtime: python3.13
   memorySize: 1024
   region: eu-west-1
   stage: ${opt:stage, 'dev'}
