@@ -18,5 +18,5 @@ setup(
         "flask",
         "flask-restful",
     ],
-    python_requires=">=3.11",
+    python_requires=">=3.13",
 )

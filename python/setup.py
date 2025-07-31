@@ -17,5 +17,5 @@ setup(
         "aws-xray-sdk",
         "okdata-aws>=5,<6",
     ],
-    python_requires=">=3.11",
+    python_requires=">=3.13",
 )
